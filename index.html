@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Timer Quiz App</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <!-- Start Quiz Button Section -->
+    <div class="start_btn">
+      <button>Start Quiz</button>
+    </div>
+
+    <!-- Quiz information and rules Section -->
+    <div class="info_div">
+      <div class="info-header">
+        <span> Rules of this Quiz </span>
+      </div>
+      <div class="info-list">
+        <div class="info">This is a timed Quiz</div>
+        <div class="info">
+          you have 10sec to pick your answer, unselected are marked as wrong
+        </div>
+        <div class="info"></div>
+      </div>
+      <div class="info_buttons">
+        <button class="quit">Quit</button>
+        <button class="restart">Restart</button>
+      </div>
+    </div>
+
+    <!--Quiz Section -->
+    <div class="quiz_div">
+      <header>
+        <div class="quiz-header">
+          <div class="quiz-timer">
+            <div class="time-left">Time Left</div>
+            <div class="time-count">10</div>
+          </div>
+        </div>
+        <div class="timer-bar"></div>
+      </header>
+      <section>
+        <div class="question_text"></div>
+        <div class="options_list"></div>
+      </section>
+      <footer>
+        <div class="question_total"></div>
+        <button class="next_btn">Next</button>
+      </footer>
+    </div>
+
+    <!--  Results Section -->
+    <div class="result_div">
+      <div class="icon">
+        <i>🏆</i>
+      </div>
+      <div class="finished-result">You have completed the Quiz</div>
+      <div class="finished-score"></div>
+      <div class="finished_buttons">
+        <button class="restart">Restart</button>
+        <buttom class="quit">Quit</buttom>
+      </div>
+    </div>
+    <script src="index.js" async defer></script>
+  </body>
+</html>
