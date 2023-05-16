@@ -232,18 +232,7 @@ section .question_options .option.disabled {
   pointer-events: none;
 }
 
-section .question_options .option .icon {
-  height: 26px;
-  width: 26px;
-  border: 2px solid transparent;
-  border-radius: 50%;
-  text-align: center;
-  font-size: 13px;
-  pointer-events: none;
-  transition: all 0.3s ease;
-  line-height: 24px;
-}
-.question_options .option .icon.tick {
+.question_options .option .icon.check {
   color: #23903c;
   border-color: #23903c;
   background: #d4edda;

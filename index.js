@@ -230,8 +230,8 @@ function showQuestions(index) {
   }
 }
 // creating the new div tags which for icons
-let tickIconTag = '<div class="icon tick"><i class="fas fa-check"></i></div>';
-let crossIconTag = '<div class="icon cross"><i class="fas fa-times"></i></div>';
+let checkIconTag = '<div><i class="fa-solid fa-check"></i></div>';
+let crossIconTag = '<div><i class="fa-solid fa-times"></i></div>';
 
 //if user clicked on option
 function optionSelected(answer) {
@@ -245,7 +245,7 @@ function optionSelected(answer) {
     //if user selected option is equal to array's correct answer
     userScore += 1; //upgrading score value with 1
     answer.classList.add("correct"); //adding green color to correct selected option
-    answer.insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to correct selected option
+    answer.insertAdjacentHTML("beforeend", checkIconTag); //adding check icon to correct selected option
     console.log("Correct Answer");
     console.log("Your correct answers = " + userScore);
   } else {
@@ -257,7 +257,7 @@ function optionSelected(answer) {
       if (questionOptions.children[i].textContent == correctAnswer) {
         //if there is an option which is matched to an array answer
         questionOptions.children[i].setAttribute("class", "option correct"); //adding green color to matched option
-        questionOptions.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
+        questionOptions.children[i].insertAdjacentHTML("beforeend", checkIconTag); //adding check icon to matched option
         console.log("Auto selected correct answer.");
       }
     }
