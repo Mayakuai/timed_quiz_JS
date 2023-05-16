@@ -166,7 +166,7 @@ restartButton.addEventListener("click", () => {
   clearInterval(counterBar); // clearing the bar timer
   startTimer(timeValue); // calls startTimer function
   startBarTimer(barValue); // calls startBarTimer function
-  timerLeft.textContent = "Time left is";
+  timerLeft.textContent = " Time Left";
   nextButton.classList.remove("show"); // hides next button
 });
 
@@ -186,7 +186,7 @@ nextButton.addEventListener("click", () => {
     clearInterval(counterBar); // clearing the bar timer
     startTimer(timeValue); // calls startTimer function
     startBarTimer(barValue); // calls startBarTimer function
-    timerLeft.textContent = "Time left is";
+    timerLeft.textContent = " Time Left";
     nextButton.classList.remove("show"); // hides next button
   } else {
     clearInterval(counter); // clears the counter
@@ -195,10 +195,6 @@ nextButton.addEventListener("click", () => {
   }
 });
 
-// getting question from the quiz array
-// function showQuestions(index){
-//     const questionText = document.querySelector(".question_text")
-// }
 
 function showQuestions(index) {
   const questionText = document.querySelector(".question_text");
@@ -223,8 +219,8 @@ function showQuestions(index) {
     '<div class="option"><span>' +
     questions[index].options[3] +
     "</span></div>";
-  questionText.innerHTML = questionTag; //adding new span tag inside que_tag
-  questionOptions.innerHTML = optionTag; //adding new div tag inside option_tag
+  questionText.innerHTML = questionTag; //adding new span tag inside questionTag
+  questionOptions.innerHTML = optionTag; //adding new div tag inside optionTag
 
   const option = questionOptions.querySelectorAll(".option");
 
@@ -277,20 +273,20 @@ function showResult() {
   quizDiv.classList.remove("showQuiz"); //hide quiz box
   resultDiv.classList.add("showResult"); //show result box
   const scoreText = resultDiv.querySelector(".finished_score");
-  if (userScore > 3) {
-    // if user scored more than 3
+  if (userScore > 8) {
+    // if user scored more than 8
     //creating a new span tag and passing the user score number and total question number
     let scoreTag =
-      "<span>and congrats! 🎉, You got <p>" +
+      "<span> Congrats and well done! You got <p>" +
       userScore +
       "</p> out of <p>" +
       questions.length +
       "</p></span>";
     scoreText.innerHTML = scoreTag; //adding new span tag inside finished_score
-  } else if (userScore > 1) {
+  } else if (userScore > 6) {
     // if user scored more than 1
     let scoreTag =
-      "<span>and nice 😎, You got <p>" +
+      "<span> Not to bad, You got <p>" +
       userScore +
       "</p> out of <p>" +
       questions.length +
@@ -299,7 +295,7 @@ function showResult() {
   } else {
     // if user scored less than 1
     let scoreTag =
-      "<span>and sorry 😐, You got only <p>" +
+      "<span> Maybe you should study more <p>" +
       userScore +
       "</p> out of <p>" +
       questions.length +
@@ -341,10 +337,10 @@ function startTimer(time) {
 }
 
 function startBarTimer(time) {
-  counterBar = setInterval(timer, 29);
+  counterBar = setInterval(timer, 20);
   function timer() {
     time += 1; //upgrading time value with 1
-    timerBar.style.width = time + "px"; //increasing width of time_line with px by time value
+    timerBar.style.width = time + "px"; //increasing width of timerBar with px by time value
     if (time > 549) {
       //if time value is greater than 549
       clearInterval(counterBar); //clear counterBar

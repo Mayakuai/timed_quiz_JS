@@ -32,11 +32,13 @@ body {
   z-index: 5;
   pointer-events: auto;
   transform: translate(-50%, -50%) scale(1);
+  box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.6), 0 6px 20px 0 rgba(57, 10, 43, 0.176);
 }
 
 .start_btn button {
   font-size: 1em;
   margin-top: 1.5em;
+  margin-bottom: 1.5;
   background-color: #1d2630;
   color: #fff;
   padding: 0.5em 1.8em;
@@ -66,6 +68,7 @@ body {
   border-radius: 5px 5px 0 0;
   font-size: 20px;
   font-weight: 600;
+  justify-content: center;
 }
 
 .info_div .info_list {
@@ -75,11 +78,14 @@ body {
 .info_div .info_list .info {
   margin: 5px 0;
   font-size: 17px;
+  justify-content: center;
+  text-align: center;
 }
 
 .info_div .info_list .info .p {
   font-weight: 600;
   color: #0f3b6b;
+  
 }
 .info_div .buttons {
   height: 60px;
@@ -92,7 +98,8 @@ body {
 
 .info_div .buttons button {
   font-size: 1em;
-  margin-top: 1.5em;
+  margin: 1.5em .1em;
+  margin-bottom: 1.5em;
   background-color: #1d2630;
   color: #fff;
   padding: 0.5em 1.8em;
@@ -131,9 +138,8 @@ body {
 }
 
 .quiz_div header .quiz_timer {
-  color: #11345a;
-  background: #cce5ff;
-  border: 1px solid #b8daff;
+  background: rgb(138, 161, 181);
+  border: 1px solid #0e2c46;
   height: 45px;
   padding: 0 8px;
   border-radius: 5px;
@@ -158,17 +164,17 @@ body {
   border-radius: 5px;
   line-height: 30px;
   text-align: center;
-  background: #343a40;
+  background: #99a9b8;
   border: 1px solid #343a40;
   user-select: none;
 }
 
-.quiz_div header .time_bar {
+.quiz_div header .timer_bar {
   position: absolute;
   bottom: 0px;
   left: 0px;
   height: 3px;
-  background: #0b3c70;
+  background: #5c0b70;
 }
 
 section {
@@ -211,9 +217,9 @@ section .question_options .option:hover {
 }
 
 section .question_options .option.correct {
-  background-color: #ffdde0;
-  color: #689f38;
-  border: #689f38;
+  background-color: #ddffe9;
+  color: #73bb33;
+  border: #73bb33;
 }
 
 section .question_options .option.wrong {
@@ -280,19 +286,20 @@ footer button {
   cursor: pointer;
   border: none;
   outline: none;
-  color: #fff;
   border-radius: 5px;
-  background: #190b37;
   border: 1px solid #321042;
   line-height: 10px;
   opacity: 0;
   pointer-events: none;
   transform: scale(0.95);
   transition: all 0.3s ease;
+  color: #240849;
+  background: #fff;
 }
 
 footer button:hover {
-  background: #1f1342;
+    color: #fff;
+    background: #240849;
 }
 
 footer button.show {
@@ -346,27 +353,29 @@ footer button.show {
 
 .result_div .buttons button {
     font-size: 1em;
-    margin-top: 1.5em;
+    margin: 1.5em .1em;
+    margin-bottom: 1.5em;
     background-color: #1d2630;
     color: #fff;
     padding: 0.5em 1.8em;
     border-radius: 0.2em;
     float: right;
     box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5);
-      cursor: pointer;
+    cursor: pointer;
 }
 
 .buttons button.restart {
-  color: #fff;
-  background: #240849;
+    color: #240849;
+    background: #fff;
 }
 
 .buttons button.restart:hover {
-  background: #240849;
+    color: #fff;
+    background: #240849;
 }
 
 .buttons button.quit {
-  color: #3f1679;
+  color: #240849;
   background: #fff;
 }
 
