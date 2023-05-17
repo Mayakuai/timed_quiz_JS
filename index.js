@@ -1,107 +1,25 @@
-// quiz question array
 
-const questions = [
-  {
-    id: 1,
-    question: "What does HTML stand for?",
-    answer: "Hyper Text Markup Language",
-    options: [
-      "Hyper Text Preprocessor",
-      "Hyper Text Markup Language",
-      "Hyper Text Multiple Language",
-      "Hyper Tool Multi Language"
-    ]
-  },
-    {
-    id: 2,
-    question: "What does CSS stand for?",
-    answer: "Cascading Style Sheet",
-    options: [
-      "Common Style Sheet",
-      "Colorful Style Sheet",
-      "Computer Style Sheet",
-      "Cascading Style Sheet"
-    ]
-  },
-    {
-    id: 3,
-    question: "What does PHP stand for?",
-    answer: "Hypertext Preprocessor",
-    options: [
-      "Hypertext Preprocessor",
-      "Hypertext Programming",
-      "Hypertext Preprogramming",
-      "Hometext Preprocessor"
-    ]
-  },
-  
-  {
-    id: "3",
-    question: "What does HTML stand for?",
-    options: [
-      "Hyperlink Tail Manager Lost",
-      "HyperText Mark-up language",
-      "HypoText Mark-up language",
-      "None of these",
-    ],
-    answer: "HyperText Mark-up language",
-  },
-  {
-    id: "4",
-    question: "What does HTML stand for?",
-    options: [
-      "Hyperlink Tail Manager Lost",
-      "HyperText Mark-up language",
-      "HypoText Mark-up language",
-      "None of these",
-    ],
-    answer: "HyperText Mark-up language",
-  },
-  {
-    id: "6",
-    question: "What does HTML stand for?",
-    options: [
-      "Hyperlink Tail Manager Lost",
-      "HyperText Mark-up language",
-      "HypoText Mark-up language",
-      "None of these",
-    ],
-    answer: "HyperText Mark-up language",
-  },
-  {
-    id: "7",
-    question: "What does HTML stand for?",
-    options: [
-      "Hyperlink Tail Manager Lost",
-      "HyperText Mark-up language",
-      "HypoText Mark-up language",
-      "None of these",
-    ],
-    answer: "HyperText Mark-up language",
-  },
-  {
-    id: "8",
-    question: "What does HTML stand for?",
-    options: [
-      "Hyperlink Tail Manager Lost",
-      "HyperText Mark-up language",
-      "HypoText Mark-up language",
-      "None of these",
-    ],
-    answer: "HyperText Mark-up language",
-  },
-  {
-    id: "9",
-    question: "What does HTML stand for?",
-    options: [
-      "Hyperlink Tail Manager Lost",
-      "HyperText Mark-up language",
-      "HypoText Mark-up language",
-      "None of these",
-    ],
-    answer: "HyperText Mark-up language",
-  },
-];
+
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-app.js";
+import { getDatabase, ref, onValue } from "https://www.gstatic.com/firebasejs/9.22.0/firebase-database.js";;
+
+const appSettings = {
+  databaseURL: "https://js-quiz-with-firebase-4f390-default-rtdb.firebaseio.com/"
+}
+
+
+const app = initializeApp(appSettings)   // initialize the application
+const db = getDatabase(app)       // get the database
+const questionInDB = ref(db, "questions") // setting up the array the question from the database
+var questions = [];    // the quiz array questions 
+
+onValue(questionInDB, function(snapshot) {             //    getting the array from the database and add
+  let questionsArray = Object.values(snapshot.val())   //    to the quiz array 
+  for (let i =0; i < questionsArray.length; i++) {
+    let question = questionsArray[i]
+    questions.push(question);
+  }
+});
 
 // element selector for quiz
 
@@ -124,6 +42,7 @@ const bottomQuestionCounter = document.querySelector("footer .question_total");
 
 startButton.addEventListener("click", () => {
   infoDiv.classList.add("showInfo"); // show info div when clicked
+ // push(questionInDB, questions)        push to firebase event
 });
 
 // quits quiz onces event handles triggered
@@ -177,7 +96,7 @@ quitButton.addEventListener("click", () => {
 
 // when the next button is triggered with click
 nextButton.addEventListener("click", () => {
-  if (questionCount < questions.length - 1) {
+  if (questionCount < questions[0].length - 1) {
     questionCount++;
     questionNumber++;
     showQuestions(questionCount);
@@ -202,22 +121,22 @@ function showQuestions(index) {
   //creating a new span and div tag for question and option and passing the value using array index
   let questionTag =
     "<span>" +
-    questions[index].id +
+    questions[0][index].id +
     ". " +
-    questions[index].question +
+    questions[0][index].question +
     "</span>";
   let optionTag =
     '<div class="option"><span>' +
-    questions[index].options[0] +
+    questions[0][index].options[0] +
     "</span></div>" +
     '<div class="option"><span>' +
-    questions[index].options[1] +
+    questions[0][index].options[1] +
     "</span></div>" +
     '<div class="option"><span>' +
-    questions[index].options[2] +
+    questions[0][index].options[2] +
     "</span></div>" +
     '<div class="option"><span>' +
-    questions[index].options[3] +
+    questions[0][index].options[3] +
     "</span></div>";
   questionText.innerHTML = questionTag; //adding new span tag inside questionTag
   questionOptions.innerHTML = optionTag; //adding new div tag inside optionTag
@@ -225,8 +144,10 @@ function showQuestions(index) {
   const option = questionOptions.querySelectorAll(".option");
 
   // set onclick attribute to all available options
-  for (i = 0; i < option.length; i++) {
-    option[i].setAttribute("onclick", "optionSelected(this)");
+  for (var i = 0; i < option.length; i++) {
+    // option[i].setAttribute("onclick", "optionSelected(this)");
+    option[i].onclick=function() { optionSelected(this); };
+
   }
 }
 // creating the new div tags which for icons
@@ -238,7 +159,7 @@ function optionSelected(answer) {
   clearInterval(counter); //clear counter
   clearInterval(counterBar); //clear counterbar
   let userAnswer = answer.textContent; //getting user selected option
-  let correctAnswer = questions[questionCount].answer; //getting correct answer from array
+  let correctAnswer = questions[0][questionCount].answer; //getting correct answer from array
   const allOptions = questionOptions.children.length; //getting all option items
 
   if (userAnswer == correctAnswer) {
@@ -253,7 +174,7 @@ function optionSelected(answer) {
     answer.insertAdjacentHTML("beforeend", crossIconTag); //adding cross icon to correct selected option
     console.log("Wrong Answer");
 
-    for (i = 0; i < allOptions; i++) {
+    for (var i = 0; i < allOptions; i++) {
       if (questionOptions.children[i].textContent == correctAnswer) {
         //if there is an option which is matched to an array answer
         questionOptions.children[i].setAttribute("class", "option correct"); //adding green color to matched option
@@ -273,23 +194,23 @@ function showResult() {
   quizDiv.classList.remove("showQuiz"); //hide quiz box
   resultDiv.classList.add("showResult"); //show result box
   const scoreText = resultDiv.querySelector(".finished_score");
-  if (userScore > 8) {
+  if (userScore > 7) {
     // if user scored more than 8
     //creating a new span tag and passing the user score number and total question number
     let scoreTag =
       "<span> Congrats and well done! You got <p>" +
       userScore +
       "</p> out of <p>" +
-      questions.length +
+      questions[0].length +
       "</p></span>";
     scoreText.innerHTML = scoreTag; //adding new span tag inside finished_score
-  } else if (userScore > 6) {
+  } else if (userScore > 5) {
     // if user scored more than 1
     let scoreTag =
       "<span> Not to bad, You got <p>" +
       userScore +
       "</p> out of <p>" +
-      questions.length +
+      questions[0].length +
       "</p></span>";
     scoreText.innerHTML = scoreTag;
   } else {
@@ -298,7 +219,7 @@ function showResult() {
       "<span> Maybe you should study more <p>" +
       userScore +
       "</p> out of <p>" +
-      questions.length +
+      questions[0].length +
       "</p></span>";
     scoreText.innerHTML = scoreTag;
   }
@@ -319,12 +240,12 @@ function startTimer(time) {
       clearInterval(counter); //clear counter
       timerLeft.textContent = "Time Off"; //change the time text to time off
       const allOptions = questionOptions.children.length; //getting all option items
-      let correctAnswer = questions[questionCount].answer; //getting correct answer from array
-      for (i = 0; i < allOptions; i++) {
+      let correctAnswer = questions[0][questionCount].answer; //getting correct answer from array
+      for (var i = 0; i < allOptions; i++) {
         if (questionOptions.children[i].textContent == correctAnswer) {
           //if there is an option which is matched to an array answer
           questionOptions.children[i].setAttribute("class", "option correct"); //adding green color to matched option
-          questionOptions.children[i].insertAdjacentHTML("beforeend", tickIconTag); //adding tick icon to matched option
+          questionOptions.children[i].insertAdjacentHTML("beforeend", checkIconTag); //adding tick icon to matched option
           console.log("Time Off: Auto selected correct answer.");
         }
       }
@@ -353,7 +274,7 @@ function questionCounter(index) {
     "<span><p>" +
     index +
     "</p> of <p>" +
-    questions.length +
+    questions[0].length +
     "</p> Questions</span>";
     bottomQuestionCounter.innerHTML = totalQuestionCountTag;
 }
